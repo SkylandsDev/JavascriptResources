@@ -2,13 +2,28 @@
 
 <html>
 	<head>
-    <!-- This file is being developed by Sir_Awesome (https://scratch.mit.edu/uesrs/Sir_Awesome) -->
+		<!-- This file is being developed by Sir_Awesome (https://scratch.mit.edu/uesrs/Sir_Awesome) -->
 		<title>Basic Keyboard Input Handling</title>
 	</head>
 	<body>
-		
+		<p id="p"></p>
+		<canvas id="canvas" style="background-color:black;width:960px;height:720px;"></canvas>
 	</body>
 	<script>
 		
+		/*
+			This detects all keyboard input, it is a slightly modified version of the code from:
+			https://stackoverflow.com/questions/5203407/javascript-multiple-keys-pressed-at-once
+		*/
+		var map = []; // You could also use an array
+		function detectKey(e){
+			e = e || event; // to deal with IE
+			map[e.keyCode] = e.type == 'keydown';
+			p.innerHTML = "" + String(map);
+		}
+		document.onkeydown = detectKey;
+		document.onkeyup = detectKey;
+		
+		demoCanvas = canvas.getContext('2d');
 	</script>
 </html>
