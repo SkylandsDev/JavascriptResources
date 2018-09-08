@@ -4,36 +4,49 @@
 	<head>
 		<!-- This file is being developed by Sir_Awesome (https://scratch.mit.edu/uesrs/Sir_Awesome) -->
 		<title>Intersection Calculating Algorithms</title>
+		<link rel="shortcut icon" type="image/x-icon" href="https://cdn.discordapp.com/icons/313885305889488897/860ccd3644af21c20a9c662ef3e25a4f.png" />
 	</head>
 	<body>
-		<p id="p"></p>
 		<canvas id="canvas" style="background-color:black;width:960px;height:720px;"></canvas>
 	</body>
 	<script>
-    
-    /*
-      Lines 14 - 37, defining constructors:
-      coordinate (coord) - x, y
-      line - point1, point2
-    */
-    function coordinate(x, y) {
-      this.x = x;
-      this.y = y;
-    }
-    // alias
-    coord = coordinate;
-    
+		/*
+			Lines 14 - 37, defining constructors:
+			coordinate() | coord() : x, y
+			line() : point1, point2
+		*/
+		function coordinate(x, y) {
+			this.x = x;
+			this.y = y;
+		}
+		// alias
+		var coord = coordinate;
+      
 		function line(point1, point2) {
-      this.point1 = point1;
-      this.point2 = point2;
-      this.x = point1.x;
-      this.y = point1.y;
-      this.dx = point2.x - point1.x;
-      this.dy = point2.y - point1.y;
-      this.m = this.dy / this.dx;
-      this.yAtX = function (x) {
-        return(this.y + (x - this.x) * this.m)
-      }
-    }
+			this.point1 = point1;
+			this.point2 = point2;
+			this.x = point1.x;
+			this.y = point1.y;
+			this.dx = point2.x - point1.x;
+			this.dy = point2.y - point1.y;
+			this.m = this.dy / this.dx;
+			this.yAtX = function (x) {
+				return(this.y + (x - this.x) * this.m)
+			}
+		}
+		
+		/*
+				Physics section
+		*/
+		
+		
+		/*
+			Rendering section
+		*/
+		var ctx = document.getElementById('canvas').getContext('2d');
+		
+		function clear() {
+			ctx.clearRect(0, 0, ctx.width, ctx.height);
+		}
 	</script>
 </html>
