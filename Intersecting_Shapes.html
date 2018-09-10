@@ -4,24 +4,24 @@
 	<head>
 		<!-- This file is being developed by Sir_Awesome (https://scratch.mit.edu/uesrs/Sir_Awesome) -->
 		<title>Intersection Calculating Algorithms</title>
-		<link rel="shortcut icon" type="image/x-icon" href="https://cdn.discordapp.com/icons/313885305889488897/860ccd3644af21c20a9c662ef3e25a4f.png" />
+		<link rel="shortcut icon" type="image/x-icon" href="https://github.com/SkylandsDev/JavascriptResources/raw/master/skylandsSimpleLogo.png" />
 	</head>
 	<body>
-		<canvas id="canvas" style="background-color:black;width:960px;height:720px;"></canvas>
+		<canvas id="canvas" style="background-color:black;" width="960px" height="720px"></canvas>
 	</body>
 	<script>
 		/*
-			Lines 14 - 37, defining constructors:
-			coordinate() | coord() : x, y
-			line() : point1, point2
+			Defining constructors
 		*/
+		/*  Defining coordinate(x, y) constructor  */
 		function coordinate(x, y) {
 			this.x = x;
 			this.y = y;
 		}
 		// alias
 		var coord = coordinate;
-      
+		
+		/*  Defining line(point1, point2) constructor  */
 		function line(point1, point2) {
 			this.point1 = point1;
 			this.point2 = point2;
@@ -33,12 +33,34 @@
 			this.yAtX = function (x) {
 				return(this.y + (x - this.x) * this.m)
 			}
+			this.draw = function() {
+				ctx.beginPath();
+				ctx.moveTo(this.point1.x, this.point1.y);
+				ctx.lineTo(this.point2.x, this.point2.y);
+				ctx.stroke();
+			}
 		}
 		
 		/*
-				Physics section
+			Inputs section
 		*/
+		var mouseX=0;
+		var mouseY=0;
+		window.onmousemove = function(e) {
+			mouseX=e.clientX-document.getElementById('canvas').getBoundingClientRect.x;
+			mouseY=e.clientY-document.getElementById('canvas').getBoundingClientRect.y;
+		}
 		
+		/*
+			Physics section
+		*/
+		/*var platformCoordinates = [[[0, 15], [5, 5], [20, 0]]]
+		var platforms = [];
+		for (i=0;i<platformCoordinates.length;i++) {
+			for (j=0;j<platformCoordinates[i].length - 1;j++) {
+				platforms.push(new line(new coord(platformCoordinates[i][j][0], platformCoordinates[i][j][1]), new coord(platformCoordinates[i][j + 1][0], platformCoordinates[i][j + 1][1])))
+			}
+		}*/
 		
 		/*
 			Rendering section
@@ -48,5 +70,18 @@
 		function clear() {
 			ctx.clearRect(0, 0, ctx.width, ctx.height);
 		}
+		
+		function renderPlatform() {
+			ctx.lineWidth='5';
+			ctx.strokeStyle='black';
+			for (i=0;i<platforms.length;i++) {
+				platforms[i].draw();
+			}
+		}
+		
+		setInterval(function() {
+			clear();
+			renderPlatform();
+		}, 30);
 	</script>
 </html>
